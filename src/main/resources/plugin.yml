@@ -1,0 +1,6 @@
+name: keinepixel-lootboxes
+main: net.keinepixel.LootboxesPlugin
+version: 0.0.1
+api-version: 1.20
+author: keinepixel
+description: A simple lootbox plugin for the KeinePixel Minecraft server.
