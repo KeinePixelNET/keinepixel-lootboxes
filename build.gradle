@@ -63,7 +63,7 @@ dependencies {
 
     implementation "io.github.rysefoxx.inventory:RyseInventory-Plugin:${ryseInventories}"
 
-    compileOnly "eu.koboo.en2do:en2do:${en2do}"
+    implementation "eu.koboo.en2do:en2do:${en2do}"
 
     compileOnly "org.projectlombok:lombok:${lombok}"
     annotationProcessor "org.projectlombok:lombok:${lombok}"
@@ -71,4 +71,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }

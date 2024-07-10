@@ -1,5 +1,6 @@
 package net.keinepixel.configuration.impl;
 
+import com.google.common.io.Files;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
@@ -7,6 +8,7 @@ import net.keinepixel.configuration.Configuration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Getter
@@ -19,6 +21,14 @@ public class DatabaseConfiguration extends Configuration {
 
     @Override
     public void load(File file) {
+        if (!file.exists()) {
+            try {
+                Files.createParentDirs(file);
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         configuration = YamlConfiguration.loadConfiguration(file);
         this.mongoUri = configuration.getString("mongodb.uri");
         this.mongoDatabase = configuration.getString("mongodb.database");
