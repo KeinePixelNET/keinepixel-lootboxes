@@ -1,0 +1,74 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.0.0'
+}
+
+group = 'net.keinepixel'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+    maven {
+        name = "maven-snapshots"
+        url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+    }
+    maven {
+        name = "alessiodp"
+        url = "https://repo.alessiodp.com/releases/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+    maven {
+        name = "infernalsuite"
+        url = "https://repo.infernalsuite.com/repository/maven-snapshots/"
+    }
+    maven {
+        name = "rapture"
+        url = "https://repo.rapture.pw/repository/maven-releases/"
+    }
+    maven {
+        name = "koboo-reposilite"
+        url = "https://reposilite.koboo.eu/releases/"
+    }
+    maven {
+        name = "jitpack"
+        url = "https://jitpack.io"
+    }
+    maven {
+        name = "sonatype-snapshots"
+        url = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+    }
+    maven {
+        name = "gradle-release-local"
+        url = "https://repo.thesimplecloud.eu/artifactory/list/gradle-release-local/"
+    }
+    maven {
+        allowInsecureProtocol = true
+        name "keinepixelReleases"
+        url "http://45.81.232.200:8080/releases"
+    }
+}
+
+dependencies {
+    compileOnly "io.papermc.paper:paper-api:${paperSpigot}"
+
+    implementation "org.reflections:reflections:${reflections}"
+
+    implementation "io.github.rysefoxx.inventory:RyseInventory-Plugin:${ryseInventories}"
+
+    compileOnly "eu.koboo.en2do:en2do:${en2do}"
+
+    compileOnly "org.projectlombok:lombok:${lombok}"
+    annotationProcessor "org.projectlombok:lombok:${lombok}"
+}
+
+test {
+    useJUnitPlatform()
+}
