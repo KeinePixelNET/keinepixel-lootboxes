@@ -6,10 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import net.keinepixel.mongo.lootbox.model.hologram.LootboxHologram;
 import net.keinepixel.mongo.lootbox.model.item.LootboxItem;
 import net.keinepixel.mongo.lootbox.model.key.LootboxKey;
 import net.kyori.adventure.text.Component;
+import org.bukkit.block.Block;
 
 import java.util.List;
 
@@ -24,9 +24,9 @@ public class Lootbox {
     String identifier;
 
     Component displayName;
+    Block blockToClick;
 
     LootboxKey key;
-    LootboxHologram hologram;
     List<LootboxItem> items;
 
 }
