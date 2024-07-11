@@ -2,11 +2,14 @@ package net.keinepixel;
 
 import eu.koboo.en2do.Credentials;
 import eu.koboo.en2do.MongoManager;
+import io.github.rysefoxx.inventory.plugin.pagination.InventoryManager;
+import lombok.Getter;
 import net.keinepixel.command.CommandManager;
 import net.keinepixel.configuration.impl.DatabaseConfiguration;
 import net.keinepixel.mongo.DatabaseManager;
 import net.keinepixel.mongo.codec.BlockCodec;
 import net.keinepixel.mongo.codec.LocationCodec;
+import net.keinepixel.mongo.codec.TextComponentCodec;
 import net.keinepixel.mongo.lootbox.LootboxManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
@@ -14,12 +17,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
+@Getter
 public class LootboxesPlugin extends JavaPlugin {
 
     MongoManager mongoManager;
 
     DatabaseConfiguration databaseConfiguration;
     DatabaseManager databaseManager;
+    InventoryManager inventoryManager;
 
     LootboxManager lootboxManager;
 
@@ -37,7 +42,8 @@ public class LootboxesPlugin extends JavaPlugin {
         }
         this.mongoManager = new MongoManager(Credentials.of(this.databaseConfiguration.getMongoUri(), this.databaseConfiguration.getMongoDatabase()))
                 .registerCodec(new BlockCodec())
-                .registerCodec(new LocationCodec());
+                .registerCodec(new LocationCodec())
+                .registerCodec(new TextComponentCodec());
 
         this.databaseManager = new DatabaseManager(this.mongoManager);
 

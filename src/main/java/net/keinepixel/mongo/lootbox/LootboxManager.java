@@ -3,10 +3,14 @@ package net.keinepixel.mongo.lootbox;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 import net.keinepixel.LootboxesPlugin;
+import net.keinepixel.inventory.LootboxEditMainMenu;
 import net.keinepixel.mongo.DatabaseManager;
 import net.keinepixel.mongo.lootbox.model.Lootbox;
 import net.keinepixel.mongo.lootbox.repository.LootboxRepository;
+import net.kyori.adventure.text.Component;
+import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -30,5 +34,23 @@ public class LootboxManager {
         this.plugin.getLogger().info("Loaded " + this.loadedLootboxes.size() + " lootboxes.");
     }
 
+    public boolean exists(String identifier) {
+        return this.loadedLootboxes.containsKey(identifier);
+    }
 
+    public Lootbox get(String identifier) {
+        return this.loadedLootboxes.get(identifier);
+    }
+
+    public Lootbox create(String lootboxName) {
+        Lootbox lootbox = new Lootbox();
+        lootbox.setIdentifier(lootboxName);
+        lootbox.setDisplayName(Component.text(lootboxName));
+        lootbox.setItems(new ArrayList<>());
+        return lootbox;
+    }
+
+    public void openEditor(Player executor, String lootboxName) {
+        new LootboxEditMainMenu(plugin, get(lootboxName)).getRyseInventory().open(executor);
+    }
 }
