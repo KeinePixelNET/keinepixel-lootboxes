@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import org.bukkit.Material;
 
 import java.util.List;
 
@@ -19,7 +20,9 @@ public class LootboxKey {
     String identifier;
     String lootboxIdentifier;
 
-    Component displayName;
-    List<Component> lore;
+    Material material;
+
+    TextComponent displayName;
+    List<TextComponent> lore;
 
 }

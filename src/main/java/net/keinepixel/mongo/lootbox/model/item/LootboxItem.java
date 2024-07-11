@@ -20,6 +20,8 @@ public class LootboxItem {
     String lootboxIdentifier;
     double chance;
 
+    boolean broadcast;
+
     List<String> commands;
     List<String> messages;
 

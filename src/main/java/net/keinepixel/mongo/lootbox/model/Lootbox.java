@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import net.keinepixel.mongo.lootbox.model.item.LootboxItem;
 import net.keinepixel.mongo.lootbox.model.key.LootboxKey;
-import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.block.Block;
 
 import java.util.List;
@@ -23,10 +23,10 @@ public class Lootbox {
     @Id
     String identifier;
 
-    Component displayName;
+    TextComponent displayName;
     Block blockToClick;
 
-    LootboxKey key;
+    List<LootboxKey> keys;
     List<LootboxItem> items;
 
 }
