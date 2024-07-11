@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class LootboxItem {
 
     String identifier;
+    ItemStack itemStack;
 
     String lootboxIdentifier;
     double chance;

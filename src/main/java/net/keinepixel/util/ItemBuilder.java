@@ -98,6 +98,7 @@ public class ItemBuilder {
         return new ItemBuilder(material);
     }
 
+    @Contract("_, _ -> new")
     public static @NotNull ItemBuilder of(@NotNull Material material, @NotNull Component component) {
         return new ItemBuilder(material, component);
     }
@@ -105,6 +106,11 @@ public class ItemBuilder {
     @Contract("_ -> new")
     public static @NotNull ItemBuilder of(@NotNull ItemStack itemStack) {
         return new ItemBuilder(itemStack);
+    }
+
+    @Contract("_ -> new")
+    public static @NotNull ItemBuilder of(@NotNull String base64) {
+        return new ItemBuilder(ItemStack.deserializeBytes(Base64.getDecoder().decode(base64)));
     }
 
     public ItemBuilder unbreakable() {
@@ -245,6 +251,10 @@ public class ItemBuilder {
     public <T, Z> ItemBuilder dataContainer(@NotNull NamespacedKey key, PersistentDataType<T, Z> type, Z value) {
         this.containers.add(new Container<>(key, value, type));
         return this;
+    }
+
+    public @NotNull String toBase64() {
+        return Base64.getEncoder().encodeToString(this.build().serializeAsBytes());
     }
 
     public @NotNull ItemStack build() {

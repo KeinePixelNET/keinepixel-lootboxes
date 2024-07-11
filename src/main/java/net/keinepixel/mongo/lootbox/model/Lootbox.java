@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import net.keinepixel.mongo.lootbox.model.item.LootboxItem;
-import net.keinepixel.mongo.lootbox.model.key.LootboxKey;
 import net.kyori.adventure.text.TextComponent;
 import org.bukkit.block.Block;
 
@@ -26,7 +25,6 @@ public class Lootbox {
     TextComponent displayName;
     Block blockToClick;
 
-    List<LootboxKey> keys;
     List<LootboxItem> items;
 
 }

@@ -36,17 +36,23 @@ public class LootboxEditMainMenu implements InventoryProvider {
     @Override
     public void init(Player player, InventoryContents contents) {
         contents.fill(IntelligentItem.empty(ItemBuilder.of(Material.BLACK_STAINED_GLASS_PANE).displayName(" ").build()));
-        contents.set(1, 4, IntelligentItem.of(ItemBuilder.of(Material.GRASS_BLOCK).displayName("§aChange block").loreOld(List.of(
+        contents.set(1, 5, IntelligentItem.of(ItemBuilder.of(Material.GRASS_BLOCK).displayName("§aChange block").loreOld(List.of(
                 "§7Change the block that represents this lootbox.",
                 "§r",
                 "§7Current block: §a" + (lootbox.getBlockToClick() != null ? lootbox.getBlockToClick().getType().name() + " @ " + lootbox.getBlockToClick().getLocation().getBlockX() + ", " + lootbox.getBlockToClick().getLocation().getBlockY() + ", " + lootbox.getBlockToClick().getLocation().getBlockZ() : "§cNone")
         )).build(), event -> {
             //TODO
         }));
-        contents.set(1, 1, IntelligentItem.of(ItemBuilder.of(Material.TRIPWIRE_HOOK).displayName("§aManage keys").loreOld(List.of(
-                "§7Manage the keys that can be used to open this lootbox.",
+        contents.set(1, 3, IntelligentItem.of(ItemBuilder.of(Material.CLOCK).displayName("§aSet available date").loreOld(List.of(
+                "§7Set the date when this lootbox will be available.",
+                "§7May be used for seasonal lootboxes."
+        )).build(), event -> {
+            //TODO
+        }));
+        contents.set(1, 1, IntelligentItem.of(ItemBuilder.of(Material.BARRIER).displayName("§cDelete lootbox").loreOld(List.of(
+                "§7Delete this lootbox.",
                 "§r",
-                "§7Current keys: §a" + lootbox.getKeys().size()
+                "§4§l!§c This action cannot be undone."
         )).build(), event -> {
             //TODO
         }));

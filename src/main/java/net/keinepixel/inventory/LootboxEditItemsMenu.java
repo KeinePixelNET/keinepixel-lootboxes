@@ -33,7 +33,8 @@ public class LootboxEditItemsMenu implements InventoryProvider {
 
     @Override
     public void init(Player player, InventoryContents contents) {
-        contents.fill(IntelligentItem.empty(ItemBuilder.of(Material.BLACK_STAINED_GLASS_PANE).displayName(" ").build()));
+        contents.fillBorders(IntelligentItem.empty(ItemBuilder.of(Material.BLACK_STAINED_GLASS_PANE).displayName(" ").build()));
+
     }
 
     @Override

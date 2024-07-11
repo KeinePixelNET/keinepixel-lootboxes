@@ -50,7 +50,6 @@ public class LootboxesPlugin extends JavaPlugin {
         this.inventoryManager.invoke();
 
         this.lootboxManager = new LootboxManager(this, this.databaseManager);
-        //Register commands and listeners here
         CommandMap commandMap = Bukkit.getServer().getCommandMap();
         commandMap.register("lootboxes", new CommandManager(this));
 
