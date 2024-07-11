@@ -3,7 +3,6 @@ package net.keinepixel.command;
 import net.keinepixel.LootboxesPlugin;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
 import org.reflections.Reflections;
 
@@ -22,7 +21,7 @@ public class CommandManager extends Command {
         Reflections reflections = new Reflections("net.keinepixel.command.impl");
         reflections.getSubTypesOf(KPCommand.class).forEach(command -> {
             try {
-                KPCommand instance = command.getDeclaredConstructor().newInstance();
+                KPCommand instance = command.getDeclaredConstructor(LootboxesPlugin.class).newInstance(plugin);
                 this.subCommands.put(instance.name, instance);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -80,7 +79,9 @@ public class CommandManager extends Command {
             sender.sendMessage("§cThis command can only be executed by a player.");
             return false;
         }
-        subCommand.execute(sender, args);
+        String[] newArgs = new String[args.length - 1];
+        System.arraycopy(args, 1, newArgs, 0, args.length - 1);
+        subCommand.execute(sender, newArgs);
         return true;
     }
 }
