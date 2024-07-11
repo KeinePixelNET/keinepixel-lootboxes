@@ -10,6 +10,7 @@ public class EditCommand extends KPCommand {
     LootboxesPlugin plugin;
 
     public EditCommand(LootboxesPlugin plugin) {
+        this.plugin = plugin;
         this.name = "edit";
         this.description = "Edit a lootbox.";
         this.usage = "/lootboxes edit <name>";

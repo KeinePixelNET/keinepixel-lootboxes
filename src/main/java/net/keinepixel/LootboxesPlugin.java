@@ -46,6 +46,8 @@ public class LootboxesPlugin extends JavaPlugin {
                 .registerCodec(new TextComponentCodec());
 
         this.databaseManager = new DatabaseManager(this.mongoManager);
+        this.inventoryManager = new InventoryManager(this);
+        this.inventoryManager.invoke();
 
         this.lootboxManager = new LootboxManager(this, this.databaseManager);
         //Register commands and listeners here

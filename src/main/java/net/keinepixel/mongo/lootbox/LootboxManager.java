@@ -47,6 +47,9 @@ public class LootboxManager {
         lootbox.setIdentifier(lootboxName);
         lootbox.setDisplayName(Component.text(lootboxName));
         lootbox.setItems(new ArrayList<>());
+        lootbox.setKeys(new ArrayList<>());
+        lootbox.setBlockToClick(null);
+        this.loadedLootboxes.put(lootboxName, lootbox);
         return lootbox;
     }
 

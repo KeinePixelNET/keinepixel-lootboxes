@@ -10,6 +10,7 @@ public class CreateCommand extends KPCommand {
     LootboxesPlugin plugin;
 
     public CreateCommand(LootboxesPlugin plugin) {
+        this.plugin = plugin;
         this.name = "create";
         this.description = "Create a new lootbox.";
         this.usage = "/lootboxes create <name>";
