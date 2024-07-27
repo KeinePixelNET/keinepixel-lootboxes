@@ -44,7 +44,7 @@ public class LootboxEditMainMenu implements InventoryProvider {
             //TODO
         }));
         contents.set(1, 3, IntelligentItem.of(ItemBuilder.of(Material.CLOCK).displayName("§aSet available date").loreOld(List.of(
-                "§7Set the date when this lootbox will be available.",
+                "§7Set the date and timeframe when this lootbox will be available.",
                 "§7May be used for seasonal lootboxes."
         )).build(), event -> {
             //TODO

@@ -38,6 +38,11 @@ public class LootboxManager {
         return this.loadedLootboxes.containsKey(identifier);
     }
 
+    public void save(Lootbox lootbox) {
+        this.lootboxRepository.save(lootbox);
+        this.loadedLootboxes.put(lootbox.getIdentifier(), lootbox);
+    }
+
     public Lootbox get(String identifier) {
         return this.loadedLootboxes.get(identifier);
     }

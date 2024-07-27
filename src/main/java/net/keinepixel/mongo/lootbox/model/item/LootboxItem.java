@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Getter
@@ -22,9 +23,9 @@ public class LootboxItem {
     String lootboxIdentifier;
     double chance;
 
-    boolean broadcast;
+    boolean broadcast = false;
 
-    List<String> commands;
-    List<String> messages;
+    List<String> commands = new LinkedList<>();
+    List<String> messages = new LinkedList<>();
 
 }

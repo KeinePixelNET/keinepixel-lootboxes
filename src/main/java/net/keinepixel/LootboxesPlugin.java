@@ -1,11 +1,13 @@
 package net.keinepixel;
 
+import com.destroystokyo.paper.exception.ServerPluginException;
 import eu.koboo.en2do.Credentials;
 import eu.koboo.en2do.MongoManager;
 import io.github.rysefoxx.inventory.plugin.pagination.InventoryManager;
 import lombok.Getter;
 import net.keinepixel.command.CommandManager;
 import net.keinepixel.configuration.impl.DatabaseConfiguration;
+import net.keinepixel.listener.InventoryClickListener;
 import net.keinepixel.mongo.DatabaseManager;
 import net.keinepixel.mongo.codec.BlockCodec;
 import net.keinepixel.mongo.codec.LocationCodec;
@@ -38,7 +40,11 @@ public class LootboxesPlugin extends JavaPlugin {
             getLogger().severe("Please set the MongoDB URI and database name in the configuration file.");
             getLogger().severe("Then restart the server to apply the changes.");
             getServer().getPluginManager().disablePlugin(this);
-            throw new RuntimeException("MongoDB URI or database name is not set in the configuration file.");
+            try {
+                throw new ServerPluginException(new Throwable("MongoDB URI or database name is not set in the configuration file."), this);
+            } catch (ServerPluginException e) {
+                throw new RuntimeException(e);
+            }
         }
         this.mongoManager = new MongoManager(Credentials.of(this.databaseConfiguration.getMongoUri(), this.databaseConfiguration.getMongoDatabase()))
                 .registerCodec(new BlockCodec())
@@ -48,6 +54,8 @@ public class LootboxesPlugin extends JavaPlugin {
         this.databaseManager = new DatabaseManager(this.mongoManager);
         this.inventoryManager = new InventoryManager(this);
         this.inventoryManager.invoke();
+
+        Bukkit.getPluginManager().registerEvents(new InventoryClickListener(this), this);
 
         this.lootboxManager = new LootboxManager(this, this.databaseManager);
         CommandMap commandMap = Bukkit.getServer().getCommandMap();

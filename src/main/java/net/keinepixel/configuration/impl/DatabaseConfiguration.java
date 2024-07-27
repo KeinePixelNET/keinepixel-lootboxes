@@ -25,27 +25,29 @@ public class DatabaseConfiguration extends Configuration {
             try {
                 Files.createParentDirs(file);
                 file.createNewFile();
+                this.configuration = YamlConfiguration.loadConfiguration(file);
+                this.save(file);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        configuration = YamlConfiguration.loadConfiguration(file);
-        this.mongoUri = configuration.getString("mongodb.uri");
-        this.mongoDatabase = configuration.getString("mongodb.database");
+        this.configuration = YamlConfiguration.loadConfiguration(file);
+        this.mongoUri = this.configuration.getString("mongodb.uri");
+        this.mongoDatabase = this.configuration.getString("mongodb.database");
     }
 
     @Override
     public void save(File file) {
-        configuration.set("mongodb.uri", this.mongoUri);
-        configuration.setComments("mongodb.uri", List.of(
+        this.configuration.set("mongodb.uri", this.mongoUri);
+        this.configuration.setComments("mongodb.uri", List.of(
                 "The MongoDB URI to connect to the database.",
                 "Example: mongodb://localhost:27017",
                 " ",
                 "This is required to connect to the database.",
                 "If not set, the plugin will not work."
         ));
-        configuration.set("mongodb.database", this.mongoDatabase);
-        configuration.setComments("mongodb.database", List.of(
+        this.configuration.set("mongodb.database", this.mongoDatabase);
+        this.configuration.setComments("mongodb.database", List.of(
                 "The MongoDB database name the client should connect to.",
                 "Example: keinepixel",
                 " ",
@@ -53,7 +55,7 @@ public class DatabaseConfiguration extends Configuration {
                 "If not set, the plugin will not work."
         ));
         try {
-            configuration.save(file);
+            this.configuration.save(file);
         } catch (Exception e) {
             e.printStackTrace();
         }
