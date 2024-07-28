@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.LinkedList;
@@ -18,6 +19,7 @@ import java.util.List;
 public class LootboxItem {
 
     String identifier;
+    TextComponent displayName;
     ItemStack itemStack;
 
     String lootboxIdentifier;

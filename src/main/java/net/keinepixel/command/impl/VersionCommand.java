@@ -22,7 +22,7 @@ public class VersionCommand extends KPCommand {
         executor.sendMessage("§aDeveloped by KeinePixel");
         executor.sendMessage("§aWebsite: https://keinepixel.net");
         executor.sendMessage("§aGitHub: https://github.com/KeinePixelNET");
-        executor.sendMessage("§aDiscord: https://discord.gg/keinepixel");
+        executor.sendMessage("§aDiscord: https://discord.com/invite/DVj98QwMwQ");
     }
 
     @Override
@@ -31,6 +31,6 @@ public class VersionCommand extends KPCommand {
         executor.sendMessage("§aDeveloped by KeinePixel");
         executor.sendMessage("§aWebsite: https://keinepixel.net");
         executor.sendMessage("§aGitHub: https://github.com/KeinePixelNET");
-        executor.sendMessage("§aDiscord: https://discord.gg/keinepixel");
+        executor.sendMessage("§aDiscord: https://discord.com/invite/DVj98QwMwQ");
     }
 }

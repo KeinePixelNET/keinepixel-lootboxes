@@ -7,9 +7,12 @@ import io.github.rysefoxx.inventory.plugin.pagination.InventoryManager;
 import lombok.Getter;
 import net.keinepixel.command.CommandManager;
 import net.keinepixel.configuration.impl.DatabaseConfiguration;
+import net.keinepixel.configuration.impl.LanguageConfiguration;
+import net.keinepixel.listener.AsyncChatListener;
 import net.keinepixel.listener.InventoryClickListener;
 import net.keinepixel.mongo.DatabaseManager;
 import net.keinepixel.mongo.codec.BlockCodec;
+import net.keinepixel.mongo.codec.ItemStackCodec;
 import net.keinepixel.mongo.codec.LocationCodec;
 import net.keinepixel.mongo.codec.TextComponentCodec;
 import net.keinepixel.mongo.lootbox.LootboxManager;
@@ -25,6 +28,8 @@ public class LootboxesPlugin extends JavaPlugin {
     MongoManager mongoManager;
 
     DatabaseConfiguration databaseConfiguration;
+    LanguageConfiguration languageConfiguration;
+
     DatabaseManager databaseManager;
     InventoryManager inventoryManager;
 
@@ -48,23 +53,22 @@ public class LootboxesPlugin extends JavaPlugin {
         }
         this.mongoManager = new MongoManager(Credentials.of(this.databaseConfiguration.getMongoUri(), this.databaseConfiguration.getMongoDatabase()))
                 .registerCodec(new BlockCodec())
+                .registerCodec(new ItemStackCodec())
                 .registerCodec(new LocationCodec())
                 .registerCodec(new TextComponentCodec());
+
+        this.languageConfiguration = new LanguageConfiguration();
+        this.languageConfiguration.load(new File(getDataFolder(), "language.yml"));
 
         this.databaseManager = new DatabaseManager(this.mongoManager);
         this.inventoryManager = new InventoryManager(this);
         this.inventoryManager.invoke();
 
         Bukkit.getPluginManager().registerEvents(new InventoryClickListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new AsyncChatListener(this), this);
 
         this.lootboxManager = new LootboxManager(this, this.databaseManager);
         CommandMap commandMap = Bukkit.getServer().getCommandMap();
         commandMap.register("lootboxes", new CommandManager(this));
-
-    }
-
-    @Override
-    public void onDisable() {
-
     }
 }

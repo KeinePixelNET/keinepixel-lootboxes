@@ -12,6 +12,7 @@ import net.keinepixel.LootboxesPlugin;
 import net.keinepixel.mongo.lootbox.model.Lootbox;
 import net.keinepixel.mongo.lootbox.model.item.LootboxItem;
 import net.keinepixel.util.ItemBuilder;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -51,7 +52,7 @@ public class LootboxEditItemsMenu implements InventoryProvider {
 
         List<IntelligentItem> items = new LinkedList<>();
         for (LootboxItem lootboxItem : this.lootbox.getItems()) {
-            items.add(IntelligentItem.of(ItemBuilder.of(lootboxItem.getItemStack()).displayName("§a" + lootboxItem.getIdentifier()).loreOld(List.of(
+            items.add(IntelligentItem.of(ItemBuilder.of(lootboxItem.getItemStack()).displayName(Component.text("§a").append(lootboxItem.getDisplayName())).loreOld(List.of(
                     "§7Chance: §a" + lootboxItem.getChance() + "%",
                     "",
                     "§7Broadcast: " + (lootboxItem.isBroadcast() ? "§aYes" : "§cNo"),
@@ -59,7 +60,8 @@ public class LootboxEditItemsMenu implements InventoryProvider {
                     "§7Messages: §a" + lootboxItem.getMessages().size(),
                     "",
                     "§aRightclick§7 to edit this item.",
-                    "§cLeftclick§7 to delete this item."
+                    "§cLeftclick§7 to delete this item.",
+                    "§8ID " + lootboxItem.getIdentifier()
             )).build(), event -> {
                 //TODO
             }));

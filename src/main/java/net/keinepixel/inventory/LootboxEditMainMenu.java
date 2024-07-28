@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 import net.keinepixel.LootboxesPlugin;
 import net.keinepixel.mongo.lootbox.model.Lootbox;
+import net.keinepixel.util.ConversationUtil;
 import net.keinepixel.util.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -54,7 +55,9 @@ public class LootboxEditMainMenu implements InventoryProvider {
                 "§r",
                 "§4§l!§c This action cannot be undone."
         )).build(), event -> {
-            //TODO
+            player.closeInventory();
+            ConversationUtil.startConversation(player, "delete_lootbox", lootbox);
+            player.sendMessage(plugin.getLanguageConfiguration().getPrefix().append(plugin.getLanguageConfiguration().getLootboxDeleteConfirm()).asComponent());
         }));
         contents.set(1, 7, IntelligentItem.of(ItemBuilder.of(Material.CHEST).displayName("§aManage items").loreOld(List.of(
                 "§7Manage the items that can be obtained from this lootbox.",

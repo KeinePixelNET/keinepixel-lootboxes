@@ -4,12 +4,15 @@ import net.keinepixel.LootboxesPlugin;
 import net.keinepixel.inventory.LootboxEditItemsMenu;
 import net.keinepixel.mongo.lootbox.model.Lootbox;
 import net.keinepixel.mongo.lootbox.model.item.LootboxItem;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.LinkedList;
@@ -25,15 +28,17 @@ public record InventoryClickListener(LootboxesPlugin plugin) implements Listener
             if (event.getClickedInventory() == playerInventory) {
                 event.setCancelled(true);
                 if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR) return;
+                ItemStack itemStack = event.getCurrentItem().clone();
                 String randomString = getRandomString();
                 LootboxItem lootboxItem = new LootboxItem();
                 lootboxItem.setIdentifier(randomString);
-                lootboxItem.setItemStack(event.getCurrentItem());
+                TextComponent displayName = itemStack.getItemMeta().hasDisplayName() ? Component.text(itemStack.getItemMeta().getDisplayName()) : Component.text(itemStack.getType().name());
+                lootboxItem.setDisplayName(displayName);
+                lootboxItem.setItemStack(itemStack);
                 lootboxItem.setChance(0);
                 lootboxItem.setBroadcast(false);
                 lootboxItem.setCommands(new LinkedList<>());
                 lootboxItem.setMessages(new LinkedList<>());
-
                 Lootbox lootbox = plugin.getLootboxManager().get(player.getOpenInventory().getOriginalTitle().replaceFirst("Edit Items: ", ""));
                 lootbox.getItems().add(lootboxItem);
                 plugin.getLootboxManager().getLoadedLootboxes().put(lootbox.getIdentifier(), lootbox);

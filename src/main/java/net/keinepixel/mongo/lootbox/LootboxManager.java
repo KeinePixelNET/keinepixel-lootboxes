@@ -8,7 +8,11 @@ import net.keinepixel.mongo.DatabaseManager;
 import net.keinepixel.mongo.lootbox.model.Lootbox;
 import net.keinepixel.mongo.lootbox.repository.LootboxRepository;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.server.PluginDisableEvent;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -16,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE, makeFinal = true)
-public class LootboxManager {
+public class LootboxManager implements Listener {
 
     protected LootboxesPlugin plugin;
     protected DatabaseManager databaseManager;
@@ -25,6 +29,8 @@ public class LootboxManager {
     Map<String, Lootbox> loadedLootboxes;
 
     public LootboxManager(LootboxesPlugin plugin, DatabaseManager databaseManager) {
+        Bukkit.getPluginManager().registerEvents(this, plugin);
+
         this.plugin = plugin;
         this.databaseManager = databaseManager;
 
@@ -32,6 +38,13 @@ public class LootboxManager {
         this.loadedLootboxes = this.lootboxRepository.findAll().stream().collect(Collectors.toMap(Lootbox::getIdentifier, lootbox -> lootbox));
 
         this.plugin.getLogger().info("Loaded " + this.loadedLootboxes.size() + " lootboxes.");
+    }
+
+    @EventHandler
+    public void onDisable(final PluginDisableEvent event) {
+        if (event.getPlugin() != this.plugin) return;
+        this.loadedLootboxes.values().forEach(this.lootboxRepository::save);
+        plugin.getLogger().info("Saved " + this.loadedLootboxes.size() + " lootboxes.");
     }
 
     public boolean exists(String identifier) {
@@ -57,7 +70,16 @@ public class LootboxManager {
         return lootbox;
     }
 
+    public void delete(String identifier) {
+        this.lootboxRepository.delete(this.loadedLootboxes.remove(identifier));
+    }
+
     public void openEditor(Player executor, String lootboxName) {
         new LootboxEditMainMenu(plugin, get(lootboxName)).getRyseInventory().open(executor);
     }
+
+    public void openEditor(Player executor, Lootbox lootbox) {
+        new LootboxEditMainMenu(plugin, lootbox).getRyseInventory().open(executor);
+    }
+
 }
