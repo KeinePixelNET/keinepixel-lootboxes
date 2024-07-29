@@ -2,7 +2,7 @@
 
 ### Introduction
 
-This is a simple lootbox system for the game "KeinePixel". It is a simple system that allows players to purchase
+This is a simple lootbox system for KeinePixel. It is a simple system that allows players to purchase
 lootboxes and receive random items from them. The system is designed to be easy to use and modify, so you can customize
 it to fit your game's needs.
 
