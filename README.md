@@ -15,8 +15,9 @@ it to fit your game's needs.
 - Admins can modify the "available date" of lootboxes (this means that lootboxes can be available only for a limited
   time and limited amount of times)
 - Admins can modify the chance of getting an item from a lootbox
-  NOTE: Item rarities are not implemented yet, if they will be implemented in the future, the system will automatically
-  calculate the chance of getting an item based on its rarity.
+
+NOTE: Item rarities are not implemented yet, if they will be implemented in the future, the system will automatically
+calculate the chance of getting an item based on its rarity.
 
 ### Installation
 
