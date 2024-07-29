@@ -32,8 +32,8 @@ public class DatabaseConfiguration extends Configuration {
             }
         }
         this.configuration = YamlConfiguration.loadConfiguration(file);
-        this.mongoUri = this.configuration.getString("mongodb.uri");
-        this.mongoDatabase = this.configuration.getString("mongodb.database");
+        this.mongoUri = this.configuration.getString("mongodb.uri", "mongodb://localhost:27017");
+        this.mongoDatabase = this.configuration.getString("mongodb.database", "keinepixel");
     }
 
     @Override
