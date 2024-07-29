@@ -1,0 +1,13 @@
+mongodb:
+    #The MongoDB URI to connect to the database.
+    #Example: mongodb://localhost:27017
+    # 
+    #This is required to connect to the database.
+    #If not set, the plugin will not work.
+    uri: mongodb://localhost:27017
+    #The MongoDB database name the client should connect to.
+    #Example: keinepixel
+    # 
+    #This is required to connect to the mongodb server.
+    #If not set, the plugin will not work.
+    database: keinepixel
