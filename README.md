@@ -1,5 +1,6 @@
 # keinepixels-lootboxes
 Open source since 29th of July, 2024
+**NOTE**: Default configuration files available [here](/default/)
 
 ### Introduction
 
