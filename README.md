@@ -1,4 +1,5 @@
 # keinepixels-lootboxes
+-# Open source since 29th of July, 2024
 
 ### Introduction
 
