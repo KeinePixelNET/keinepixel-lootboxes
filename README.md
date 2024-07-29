@@ -49,7 +49,7 @@ soon™
 ### Support
 
 If you have any questions or need help with the plugin, feel free to join
-our [Discord server](https://discord.com/invite/) and ask for help in the `#support` channel.
+our [Discord server]( https://discord.com/invite/DVj98QwMwQ/) and ask for help in the `#support` channel.
 
 ### FAQ
 
